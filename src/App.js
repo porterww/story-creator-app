@@ -9,16 +9,11 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 library.add(faTrashAlt)
 
 class App extends Component {
-
   renderEditPage = () => {
-    return (
-      <EditPage/>
-    )
+    return <EditPage />
   }
   renderViewPage = () => {
-    return (
-      <ViewPage/>
-    )
+    return <ViewPage />
   }
 
   render() {
