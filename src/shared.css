@@ -59,6 +59,11 @@ nav a:hover {
   text-decoration: underline;
   font-size: 25px;
 }
+.story-buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
 
 .editor {
   display: flex;
@@ -73,9 +78,19 @@ nav a:hover {
   order: 1;
 }
 
+#story-name {
+  margin-bottom: 7px;
+}
+
+#author {
+  margin-bottom: 7px;
+}
+
+#genre {
+  margin-bottom: 7px;
+}
+
 form {
-  /* display: flex;
-    flex-flow: column wrap; */
   display: inline-block;
   width: 200px;
   padding: 5px;
@@ -84,11 +99,15 @@ form {
 
 .viewer {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   border: 4px solid black;
-  min-width: 500em;
+  min-width: 20em;
+  width: 50em;
+  max-width: 100%;
   min-height: 200px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  order: 1;
 }
 
 input[type='text'] {
@@ -99,6 +118,11 @@ input[type='text'] {
 fieldset {
   position: relative;
   right: 16.7em;
+}
+
+.savestorybutton {
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .mce-container-body .mce-stack-layout {
@@ -121,9 +145,18 @@ fieldset {
     order: 1;
     width: 357px;
   }
+
+  .viewer {
+    order: 1;
+    width: 357px;
+  }
   fieldset {
     position: relative;
     right: 4.4em;
+  }
+  .savestorybutton {
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
   .mce-container-body .mce-stack-layout {
     min-width: 305px;
