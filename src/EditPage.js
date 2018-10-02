@@ -1,9 +1,107 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
-// import StoryList from './StoryList'
+import StoryList from './StoryList'
 import TinyMCE from 'react-tinymce'
 
 class EditPage extends Component {
+  state = {
+    storyTitleInProgress: '',
+    authorInProgress: '',
+    genreInProgress: '',
+    storyInProgress: ''
+  }
+
+  handleTitleChange = event => {
+    this.setState({
+      storyTitleInProgress: event.target.value
+    })
+  }
+
+  handleAuthorChange = event => {
+    this.setState({
+      authorInProgress: event.target.value
+    })
+  }
+
+  handleGenreChange = event => {
+    this.setState({
+      genreInProgress: event.target.value
+    })
+  }
+
+  handleStoryChange = event => {
+    this.setState({
+      storyInProgress: event.target.value
+    })
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:2018/stories', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(stories => {
+        this.setState({ stories })
+      })
+      .catch(error => {
+        return this.setState({ errormessage: error.message })
+      })
+  }
+
+  postData = () => {
+    fetch('http://localhost:2018/stories', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        storyTitleInProgress: this.state.storyTitleInProgress,
+        authorInProgress: this.state.authorInProgress,
+        genreInProgress: this.state.genreInProgress,
+        storyInProgress: this.state.storyInProgress
+      })
+    })
+      .then(response => response.json())
+      .then(stories => this.setState({ stories }))
+      .catch(error => {
+        return this.setState({ errormessage: error.message })
+      })
+  }
+
+  saveStory = () => {
+    // this.props.saveTVShow({
+    //   title: this.state.storyTitleInProgress,
+    //   author: this.state.authorInProgress,
+    //   genre: this.genreInProgress,
+    //   story: this.storyInProgress
+    this.postData()
+    this.setState({
+      storyTitleInProgress: '',
+      authorInProgress: '',
+      genreInProgress: '',
+      storyInProgress: ''
+    })
+  }
+
+  renderStories = () => {
+    if (this.state.stories) {
+      return this.state.stories.map((stories, i) => {
+        return (
+          <StoryList key={i} title={stories.storyTitleInProgress}
+           selectHandler={this.storySelected}
+           deleteHandler={this.storyDeleted}
+           allowDelete={true}
+           />
+        )
+      })
+    }
+  }
+
   render() {
     return (
       <div className="main-body">
@@ -12,7 +110,7 @@ class EditPage extends Component {
             <div className="story-listing-header">
               <h1>Stories</h1>
             </div>
-            {/*this will be a render for the story buttons when data is saved */}
+            {this.renderStories()}
           </section>
           <div className="rightBlock">
             <SiteNav />
@@ -25,7 +123,8 @@ class EditPage extends Component {
                   <input
                     id="story-name"
                     type="text"
-                    /*We will add a value here later for handles and name changes*/
+                    value={this.state.storyTitleInProgress}
+                    onChange={this.handleTitleChange}
                   />
                 </label>
                 <label htmlFor="author">
@@ -33,7 +132,8 @@ class EditPage extends Component {
                   <input
                     id="author"
                     type="text"
-                    /*We will add a value here later for handles and name changes*/
+                    value={this.state.authorInProgress}
+                    onChange={this.handleAuthorChange}
                   />
                 </label>
                 <label htmlFor="genre">
@@ -41,27 +141,34 @@ class EditPage extends Component {
                   <input
                     id="genre"
                     type="text"
-                    /*We will add a value here later for handles and name changes*/
+                    value={this.state.genreInProgress}
+                    onChange={this.handleGenreChange}
                   />
                 </label>
                 <label htmlFor="story-box">
                   <fieldset>
                     <legend>Story</legend>
-                    {/* <textarea
-                      id="story-box"
-                      type="text"
-                      We will add a value here later for handles and name changes
-                    /> */}
                     <TinyMCE
+                      id="story-box"
+                      value={this.storyInProgress}
+                      onChange={this.handleStoryChange}
                       content=""
                       config={{
                         toolbar:
                           'undo redo | bold italic | alignleft aligncenter alignright'
                       }}
-                      onChange={this.handleEditorChange}
                     />
                   </fieldset>
                 </label>
+                <div className="savestorybutton">
+                  <button
+                    className="savebutton"
+                    type="submit"
+                    onClick={this.saveStory}
+                  >
+                    Save Story
+                  </button>
+                </div>
               </form>
             </section>
           </div>

@@ -1,8 +1,30 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
-// import StoryList from './StoryList'
+import StoryList from './StoryList'
 
 class ViewPage extends Component {
+
+  state = {
+    storyTitleInProgress: '',
+    authorInProgress: '',
+    genreInProgress: '',
+    storyInProgress: ''
+  }
+
+  renderStories = () => {
+    if (this.state.stories) {
+      return this.state.stories.map((stories, i) => {
+        return (
+          <StoryList key={i} title={stories.storyTitleInProgress}
+           selectHandler={this.storySelected}
+           deleteHandler={this.storyDeleted}
+           allowDelete={true}
+           />
+        )
+      })
+    }
+  }
+
   render() {
     return (
       <div className="main-body">
@@ -11,7 +33,7 @@ class ViewPage extends Component {
             <div className="story-listing-header">
               <h1>Stories</h1>
             </div>
-            {/*this will be a render for the story buttons when data is saved */}
+            {this.renderStories()}
           </section>
           <div className="rightBlock">
             <SiteNav />

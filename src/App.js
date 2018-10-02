@@ -9,11 +9,44 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 library.add(faTrashAlt)
 
 class App extends Component {
+
+  state = {
+    storylist: {
+      title: '',
+      author: '',
+      genre: '',
+      story: ''
+    },
+    stories: []
+  }
+
   renderEditPage = () => {
     return <EditPage />
   }
   renderViewPage = () => {
-    return <ViewPage />
+    return <ViewPage storylist={this.state.storylist} stories={this.state.stories}/>
+  }
+
+  storyDeleted = () => {
+    this.setState({
+      storylist: {
+        name: ''
+      }
+    })
+  }
+  saveStory = storiesToSave => {
+    console.log(storiesToSave)
+    this.setState(prevState => ({
+      stories: [
+        ...prevState.stories,
+        {
+          title: storiesToSave.title,
+          author: storiesToSave.author,
+          genre: storiesToSave.genre,
+          story: storiesToSave.story
+        }
+      ]
+    }))
   }
 
   render() {
