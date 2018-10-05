@@ -23,11 +23,11 @@ class StoryList extends Component {
   }
 
   renderButtons() {
-    if (this.props.name) {
+    if (this.props.title) {
       return (
         <div>
           <button className="storybutton" onClick={this.props.selectHandler}>
-            {this.props.name}
+            {this.props.title}
           </button>
           {this.renderDelete()}
         </div>

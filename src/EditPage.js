@@ -31,7 +31,7 @@ class EditPage extends Component {
 
   handleStoryChange = event => {
     this.setState({
-      storyInProgress: event.target.value
+      storyInProgress: event.target.getContent()
     })
   }
 
@@ -60,43 +60,51 @@ class EditPage extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        storyTitleInProgress: this.state.storyTitleInProgress,
-        authorInProgress: this.state.authorInProgress,
-        genreInProgress: this.state.genreInProgress,
-        storyInProgress: this.state.storyInProgress
+        title: this.state.storyTitleInProgress,
+        author: this.state.authorInProgress,
+        genre: this.state.genreInProgress,
+        story: this.state.storyInProgress
       })
     })
       .then(response => response.json())
-      .then(stories => this.setState({ stories }))
+      .then(stories => {
+        
+        console.log(stories)
+        this.setState({
+          stories,
+          storyTitleInProgress: '',
+          authorInProgress: '',
+          genreInProgress: '',
+          storyInProgress: ''
+        })
+
+      })
       .catch(error => {
         return this.setState({ errormessage: error.message })
       })
   }
 
-  saveStory = () => {
+  saveStory = e => {
+    // e.preventDefault()
     // this.props.saveTVShow({
     //   title: this.state.storyTitleInProgress,
     //   author: this.state.authorInProgress,
     //   genre: this.genreInProgress,
     //   story: this.storyInProgress
     this.postData()
-    this.setState({
-      storyTitleInProgress: '',
-      authorInProgress: '',
-      genreInProgress: '',
-      storyInProgress: ''
-    })
   }
 
   renderStories = () => {
     if (this.state.stories) {
-      return this.state.stories.map((stories, i) => {
+      return this.state.stories.map((data, i) => {
         return (
-          <StoryList key={i} title={stories.storyTitleInProgress}
-           selectHandler={this.storySelected}
-           deleteHandler={this.storyDeleted}
-           allowDelete={true}
-           />
+          <StoryList
+            key={i}
+            title={data.title}
+            selectHandler={this.storySelected}
+            deleteHandler={this.storyDeleted}
+            allowDelete={true}
+          />
         )
       })
     }
@@ -110,14 +118,14 @@ class EditPage extends Component {
             <div className="story-listing-header">
               <h1>Stories</h1>
             </div>
-            {this.renderStories()}
+            <div className="button-listing">{this.renderStories()}</div>
           </section>
           <div className="rightBlock">
             <SiteNav />
             <section className="editor">
               <h2>Create/Edit Your Story</h2>
               {/* inputs need to be assigned to each 'for' attribute. Always needed for label to inputs to function properly. */}
-              <form>
+              <form className="form">
                 <label htmlFor="story-name">
                   Story Title:
                   <input
@@ -150,7 +158,6 @@ class EditPage extends Component {
                     <legend>Story</legend>
                     <TinyMCE
                       id="story-box"
-                      value={this.storyInProgress}
                       onChange={this.handleStoryChange}
                       content=""
                       config={{
