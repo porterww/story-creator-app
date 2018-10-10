@@ -125,7 +125,7 @@ class EditPage extends Component {
             <section className="editor">
               <h2>Create/Edit Your Story</h2>
               {/* inputs need to be assigned to each 'for' attribute. Always needed for label to inputs to function properly. */}
-              <form className="form">
+              <div className="form">
                 <label htmlFor="story-name">
                   Story Title:
                   <input
@@ -176,7 +176,7 @@ class EditPage extends Component {
                     Save Story
                   </button>
                 </div>
-              </form>
+              </div>
             </section>
           </div>
         </div>

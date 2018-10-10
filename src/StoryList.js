@@ -25,11 +25,13 @@ class StoryList extends Component {
   renderButtons() {
     if (this.props.title) {
       return (
-        <div>
+        <div className="show-delete">
           <button className="storybutton" onClick={this.props.selectHandler}>
             {this.props.title}
           </button>
+          <div className="deletebox">
           {this.renderDelete()}
+          </div>
         </div>
       )
     }

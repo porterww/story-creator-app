@@ -49,7 +49,7 @@ nav a:hover {
   flex-direction: column;
   border: 4px solid black;
   font-size: 15px;
-  min-width: 10em;
+  min-width: 12em;
   max-height: 37.5em;
   order: -1;
 }
@@ -80,11 +80,16 @@ nav a:hover {
 
 .story-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: row;
   margin: auto;
   margin-bottom: 15px;
   display: block;
+}
+
+.show-delete {
+  display: flex;
+  flex-direction: row;
 }
 
 .storybutton {
@@ -92,10 +97,13 @@ nav a:hover {
   white-space: normal;
   word-wrap: break-word;
 }
-
+.deletebox {
+  margin-top: 7px;
+  margin-left: 11px;
+}
 .deletebutton {
-  position: relative;
-  left: 8px;
+  color: darkred;
+  font-size: 17px;
 }
 
 .editor {
@@ -232,5 +240,14 @@ fieldset {
     max-width: 100px;
     white-space: normal;
     word-wrap: break-word;
+  }
+  .show-delete {
+    display: flex;
+    flex-direction: column;
+  }
+  .deletebox {
+    align-self: center;
+    margin-top: 12px;
+    font-size: 20px;
   }
 }
