@@ -98,7 +98,7 @@ nav a:hover {
   word-wrap: break-word;
 }
 .deletebox {
-  margin-top: 7px;
+  margin-top: 4px;
   margin-left: 11px;
 }
 .deletebutton {
@@ -156,19 +156,30 @@ input[type='text'] {
   padding: 1px;
 }
 
-fieldset {
+#storybox {
   position: relative;
   right: 16.7em;
 }
+#storybox textarea {
+  width: 710px;
+  height: 100px;
+  overflow-y: scroll;
+}
 
+/*This will be used once TinyMCE is returned as 
+the story editor*/
+/* .fieldset-tinymce {
+  position: relative;
+  right: 16.7em;
+} */
+/* .mce-container-body .mce-stack-layout {
+  min-width: 700px;
+  padding: 1px;
+} */
+/*---------------------------*/
 .savestorybutton {
   margin-top: 10px;
   margin-bottom: 5px;
-}
-
-.mce-container-body .mce-stack-layout {
-  min-width: 700px;
-  padding: 1px;
 }
 
 @media (max-width: 600px) {
@@ -187,18 +198,32 @@ fieldset {
     order: 1;
     width: 357px;
   }
-  fieldset {
+  .viewer #story {
+    margin: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 2px solid black;
+    background-color: white;
+  }
+
+  /*This will be used once TinyMCE is returned as 
+the story editor*/
+  /* fieldset {
     position: relative;
     right: 4.4em;
-  }
+  } */
+  /* .mce-container-body .mce-stack-layout {
+    min-width: 305px;
+    padding: 1px;
+  } */
+  /*---------------------------*/
   .savestorybutton {
     margin-top: 10px;
     margin-bottom: 5px;
   }
-  .mce-container-body .mce-stack-layout {
-    min-width: 305px;
-    padding: 1px;
-  }
+
   #story-listing {
     display: flex;
     border: 4px solid black;
@@ -249,5 +274,14 @@ fieldset {
     align-self: center;
     margin-top: 12px;
     font-size: 20px;
+  }
+  #storybox {
+    position: relative;
+    right: 68px;
+  }
+  #storybox textarea {
+    width: 300px;
+    height: 100px;
+    overflow-y: scroll;
   }
 }
