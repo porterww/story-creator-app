@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
-import TinyMCE from 'react-tinymce'
+// import TinyMCE from 'react-tinymce'
 
 class EditPage extends Component {
   state = {
-    storyTitleInProgress: '',
+    titleInProgress: '',
     authorInProgress: '',
     genreInProgress: '',
     storyInProgress: ''
@@ -13,7 +13,7 @@ class EditPage extends Component {
 
   handleTitleChange = event => {
     this.setState({
-      storyTitleInProgress: event.target.value
+      titleInProgress: event.target.value
     })
   }
 
@@ -31,77 +31,125 @@ class EditPage extends Component {
 
   handleStoryChange = event => {
     this.setState({
-      storyInProgress: event.target.getContent()
+      storyInProgress: event.target.value
+
+      //the event below is for TinyMCE when it is returned
+      // storyInProgress: event.target.getContent()
     })
   }
 
-  componentDidMount() {
-    fetch('http://localhost:2018/stories', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(stories => {
-        this.setState({ stories })
-      })
-      .catch(error => {
-        return this.setState({ errormessage: error.message })
-      })
+  async componentDidMount() {
+    await this.getStories()
   }
-
-  postData = () => {
-    fetch('http://localhost:2018/stories', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: this.state.storyTitleInProgress,
-        author: this.state.authorInProgress,
-        genre: this.state.genreInProgress,
-        story: this.state.storyInProgress
+  
+  getStories = async () => {
+    try {
+      const r = await fetch('http://localhost:2018/stories', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
-    })
-      .then(response => response.json())
-      .then(stories => {
-        
-        console.log(stories)
-        this.setState({
-          stories,
-          storyTitleInProgress: '',
-          authorInProgress: '',
-          genreInProgress: '',
-          storyInProgress: ''
+      const stories = await r.json()
+      this.setState({ stories })
+    } catch (error) {
+      return this.setState({ error: error.message })
+    }
+  }
+  async postData() {
+    try {
+      const r = await fetch('http://localhost:2018/stories', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: this.state.titleInProgress,
+          author: this.state.authorInProgress,
+          genre: this.state.genreInProgress,
+          story: this.state.storyInProgress
         })
-
       })
-      .catch(error => {
-        return this.setState({ errormessage: error.message })
+      const stories = await r.json()
+      if (stories.isJoi) {
+        this.setState({ message: stories.details[0].context.label })
+        console.log(stories)
+      } else {
+        console.log(stories)
+        this.setState({ stories })
+      }
+    } catch (error) {
+      return this.setState({ error: error.message })
+    }
+  }
+  updateStory = async () => {
+    try {
+      const r = await fetch('http://localhost:2018/stories', {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: this.state.titleInProgress,
+          author: this.state.authorInProgress,
+          genre: this.state.genreInProgress,
+          story: this.state.storyInProgress,
+          _id: this.state.idInProgress
+        })
       })
+      const updatedstory = await r.json()
+      if (updatedstory.isJoi) {
+        this.setState({ message: updatedstory.details[0].context.label })
+        console.log(updatedstory)
+      } else {
+        await this.getStories()
+        console.log(updatedstory.title)
+         this.setState({
+          titleInProgress: updatedstory.title,
+          authorInProgress: updatedstory.author,
+          genreInProgress: updatedstory.genre,
+          storyInProgress: updatedstory.story,
+          idInProgress: updatedstory._id
+        })
+      }
+    } catch (error) {
+      return this.setState({ error: error.message })
+    }
   }
 
-  saveStory = e => {
-    // e.preventDefault()
-    // this.props.saveTVShow({
-    //   title: this.state.storyTitleInProgress,
-    //   author: this.state.authorInProgress,
-    //   genre: this.genreInProgress,
-    //   story: this.storyInProgress
-    this.postData()
+  saveStory = () => {
+    if (this.state.idInProgress) {
+      this.updateStory()
+    } else {
+      this.postData()
+    }
+    this.setState({})
+  }
+
+  tvShowDeleted = () => {
+    this.props.tvShowDeleted()
   }
 
   renderStories = () => {
+    console.log(this.state)
     if (this.state.stories) {
-      return this.state.stories.map((data, i) => {
+      return this.state.stories.map((stories, i) => {
         return (
           <StoryList
             key={i}
-            title={data.title}
-            selectHandler={this.storySelected}
+            title={stories.title}
+            selectHandler={() =>
+              this.setState({
+                titleInProgress: stories.title,
+                authorInProgress: stories.author,
+                genreInProgress: stories.genre,
+                storyInProgress: stories.story,
+                idInProgress: stories._id
+              })
+            }
             deleteHandler={this.storyDeleted}
             allowDelete={true}
           />
@@ -111,6 +159,7 @@ class EditPage extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="main-body">
         <div className="listings">
@@ -124,6 +173,7 @@ class EditPage extends Component {
             <SiteNav />
             <section className="editor">
               <h2>Create/Edit Your Story</h2>
+              {this.state.message}
               {/* inputs need to be assigned to each 'for' attribute. Always needed for label to inputs to function properly. */}
               <div className="form">
                 <label htmlFor="story-name">
@@ -131,7 +181,7 @@ class EditPage extends Component {
                   <input
                     id="story-name"
                     type="text"
-                    value={this.state.storyTitleInProgress}
+                    value={this.state.titleInProgress}
                     onChange={this.handleTitleChange}
                   />
                 </label>
@@ -154,17 +204,24 @@ class EditPage extends Component {
                   />
                 </label>
                 <label htmlFor="story-box">
-                  <fieldset>
+                  <fieldset className="fieldset-tinymce" id="storybox">
                     <legend>Story</legend>
-                    <TinyMCE
+                    <textarea
                       id="story-box"
                       onChange={this.handleStoryChange}
-                      content=""
+                      type="text"
+                      value={this.state.storyInProgress}
+                      placeholder="Write your story here! :)"
+                    />
+                    {/* <TinyMCE
+                      id="story-box"
+                      onChange={this.handleStoryChange}
+                      content={this.state.storyInProgress}
                       config={{
                         toolbar:
                           'undo redo | bold italic | alignleft aligncenter alignright'
                       }}
-                    />
+                    /> */}
                   </fieldset>
                 </label>
                 <div className="savestorybutton">
