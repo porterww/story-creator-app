@@ -8,7 +8,8 @@ class EditPage extends Component {
     titleInProgress: '',
     authorInProgress: '',
     genreInProgress: '',
-    storyInProgress: ''
+    storyInProgress: '',
+    story: ''
   }
 
   handleTitleChange = event => {
@@ -119,6 +120,34 @@ class EditPage extends Component {
       return this.setState({ error: error.message })
     }
   }
+  deleteMyStory = async (story) => {
+    console.log('deleting a story', story)
+    try {
+      const r = await fetch(`http://localhost:2018/stories-delete/${story._id}/`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          story: this.state._id
+        })
+      })
+      const deleteStory = await r.json()
+      if(deleteStory.isJoi) {
+        this.setState({ message: deleteStory.details[0].context.label })
+        console.log(deleteStory)
+      } else {
+        await this.getStories(story)
+        console.log(deleteStory.title)
+         this.setState({
+            story: deleteStory._id
+        })
+      }
+      } catch (error) {
+        return this.setState({ error: error.message })
+      }
+  }
 
   saveStory = () => {
     if (this.state.idInProgress) {
@@ -129,12 +158,8 @@ class EditPage extends Component {
     this.setState({})
   }
 
-  tvShowDeleted = () => {
-    this.props.tvShowDeleted()
-  }
-
   renderStories = () => {
-    console.log(this.state)
+    // console.log(this.state.stories[_id])
     if (this.state.stories) {
       return this.state.stories.map((stories, i) => {
         return (
@@ -150,7 +175,7 @@ class EditPage extends Component {
                 idInProgress: stories._id
               })
             }
-            deleteHandler={this.storyDeleted}
+            deleteHandler={()=>this.deleteMyStory(stories)}
             allowDelete={true}
           />
         )
@@ -159,7 +184,6 @@ class EditPage extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="main-body">
         <div className="listings">
