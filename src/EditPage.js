@@ -53,6 +53,7 @@ class EditPage extends Component {
         }
       })
       const stories = await r.json()
+      console.log(stories)
       this.setState({ stories })
     } catch (error) {
       return this.setState({ error: error.message })
@@ -123,7 +124,7 @@ class EditPage extends Component {
   deleteMyStory = async (story) => {
     console.log('deleting a story', story)
     try {
-      const r = await fetch(`http://localhost:2018/stories-delete/${story._id}/`, {
+      const r = await fetch(`http://localhost:2018/stories-delete/${story._id}`, {
         method: 'DELETE',
         headers: {
           Accept: 'application/json',
