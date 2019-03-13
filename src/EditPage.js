@@ -36,7 +36,7 @@ class EditPage extends Component {
 
       //the event below is for TinyMCE when it is returned
       // storyInProgress: event.target.getContent()
-    })
+    }) 
   }
 
   async componentDidMount() {
@@ -53,7 +53,7 @@ class EditPage extends Component {
         }
       })
       const stories = await r.json()
-      console.log(stories)
+      // console.log(stories)
       this.setState({ stories })
     } catch (error) {
       return this.setState({ error: error.message })
@@ -77,9 +77,9 @@ class EditPage extends Component {
       const stories = await r.json()
       if (stories.isJoi) {
         this.setState({ message: stories.details[0].context.label })
-        console.log(stories)
+        // console.log(stories)
       } else {
-        console.log(stories)
+        // console.log(stories)
         this.setState({ stories })
       }
     } catch (error) {
@@ -105,10 +105,10 @@ class EditPage extends Component {
       const updatedstory = await r.json()
       if (updatedstory.isJoi) {
         this.setState({ message: updatedstory.details[0].context.label })
-        console.log(updatedstory)
+        // console.log(updatedstory)
       } else {
         await this.getStories()
-        console.log(updatedstory.title)
+        // console.log(updatedstory.title)
          this.setState({
           titleInProgress: updatedstory.title,
           authorInProgress: updatedstory.author,
@@ -124,7 +124,7 @@ class EditPage extends Component {
   deleteMyStory = async (story) => {
     console.log('deleting a story', story)
     try {
-      const r = await fetch(`http://localhost:2018/stories-delete/${story._id}`, {
+      await fetch(`http://localhost:2018/stories-delete/${story._id}`, {
         method: 'DELETE',
         headers: {
           Accept: 'application/json',
@@ -134,17 +134,7 @@ class EditPage extends Component {
           story: this.state._id
         })
       })
-      const deleteStory = await r.json()
-      if(deleteStory.isJoi) {
-        this.setState({ message: deleteStory.details[0].context.label })
-        console.log(deleteStory)
-      } else {
         await this.getStories(story)
-        console.log(deleteStory.title)
-         this.setState({
-            story: deleteStory._id
-        })
-      }
       } catch (error) {
         return this.setState({ error: error.message })
       }
