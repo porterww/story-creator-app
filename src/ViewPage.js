@@ -17,7 +17,7 @@ class ViewPage extends Component {
   }
 
   async componentDidMount() {
-    console.log('comp started')
+    // console.log('comp started')
     try {
       const r = await fetch('http://localhost:2018/stories', {
         method: 'GET',
@@ -26,9 +26,9 @@ class ViewPage extends Component {
           'Content-Type': 'application/json'
         }
       })
-      console.log('called fetch')
+      // console.log('called fetch')
       const stories = await r.json()
-      console.log(stories)
+      // console.log(stories)
       this.setState({ stories })
     } catch (error) {
       return this.setState({ error: error.message })
@@ -53,9 +53,9 @@ class ViewPage extends Component {
       const stories = await r.json()
       if (stories.isJoi) {
         this.setState({ message: stories.details[0].context.label })
-        console.log(stories)
+        // console.log(stories)
       } else {
-        console.log(stories)
+        // console.log(stories)
         this.setState({ stories })
       }
     } catch (error) {
@@ -64,7 +64,7 @@ class ViewPage extends Component {
   }
 
   renderStories = () => {
-    console.log(this.state.stories)
+    // console.log(this.state.stories)
     if (this.state.stories) {
       return this.state.stories.map((stories, i) => {
         return (
@@ -82,7 +82,7 @@ class ViewPage extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <div className="main-body">
         <div className="listings">
