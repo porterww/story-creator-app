@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
 // import TinyMCE from 'react-tinymce'
-
+//This page is where the user can create their story.
+//TO DO: Add ability for user to switch their story between options of public or private.
+//TO DO: Add menu dropdown for users for eventual profile editing settings, display settings, and logout features.
 class EditPage extends Component {
   state = {
     titleInProgress: '',

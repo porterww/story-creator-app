@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
 // import PropTypes from 'prop-types'
+//This page is where the user can view story(s).
+//TO DO: Add ability for user to search for other users and stories.
+//TO DO: Add menu dropdown for users for eventual profile editing settings, display settings, and logout features.
+//TO DO: Add a follow other users and rating system.
 
 class ViewPage extends Component {
   static propTypes = {
