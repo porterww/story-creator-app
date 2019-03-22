@@ -17,8 +17,9 @@ footer {
   display: flex;
 }
 
-nav {
+.storyNav {
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
   border: 4.5px solid black;
   font-size: 25px;
@@ -29,13 +30,13 @@ nav {
   order: 1;
 }
 
-nav a {
+.storyNav a {
   text-decoration: none;
   color: black;
   padding-top: 2px;
 }
 
-nav a:hover {
+.storyNav a:hover {
   color: teal;
 }
 
@@ -166,6 +167,11 @@ input[type='text'] {
   overflow-y: scroll;
 }
 
+.savestorybutton {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+/*---------------------------*/
 /*This will be used once TinyMCE is returned as 
 the story editor*/
 /* .fieldset-tinymce {
@@ -177,16 +183,150 @@ the story editor*/
   padding: 1px;
 } */
 /*---------------------------*/
-.savestorybutton {
-  margin-top: 10px;
-  margin-bottom: 5px;
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+/*Code below is for login/register/forgotpass screens*/
+.login-body {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 5em;
+  margin-top: 1.5em;
 }
 
+/* .login-window {
+  something will go here later
+} */
+
+.header1 {
+  display: flex;
+  justify-content: center;
+}
+
+legend {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.login-section {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  flex-direction: column;
+}
+
+.login-inputs {
+  display: flex;
+  margin: 10px;
+  padding: 5px;
+  align-content: center;
+  flex-direction: column;
+}
+#email{
+  margin: 5px;
+}
+#password {
+  margin: 5px;
+}
+
+.login-button {
+  align-self: center;
+  padding: 3px;
+}
+
+.userNav {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 18px;
+  color: darkcyan;
+}
+
+.userNav a {
+  text-decoration: none;
+  color: blueviolet;
+  padding-top: 2px;
+}
+
+/*Code for Register Page*/
+.register-section input:invalid {
+  border: 2px solid red;
+  background-color: lightgray;
+}
+.register-section input:valid {
+  border: 1px solid black;
+}
+
+.register-body {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5em;
+  margin-top: 1.5em;
+}
+
+.R-parent {
+  display: flex;
+  justify-content: center;
+}
+
+.R-parent label{
+  display: block;
+  margin-top: 10px;
+}
+
+.R-parent input{
+  margin-top: 3px;
+}
+
+.register-window {
+  min-width: 200px;
+  max-width: 500px;
+  min-height: 200px;
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  border: 2px solid black;
+}
+.register-window h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+.register-window h2 {
+  text-align: center;
+  font-size: 20px;
+}
+
+.personal-info-section {
+  display: flex;
+  text-align: left;
+  min-width: 150px;
+}
+.register-form {
+  display: block;
+}
+
+.login-creds-window {
+  margin-top: 20px;
+}
+
+.register-section {
+  display: flex;
+  align-content: center;
+  min-width: 150px;
+}
+
+
+/*Code below is for tablet/phone size screens*/
 @media (max-width: 600px) {
   .listings {
     flex-direction: column;
   }
-  nav {
+  .storyNav {
     order: -1;
   }
   .editor {
