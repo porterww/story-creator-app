@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
+// import GoogleLogout from 'react-google-login'
 // import TinyMCE from 'react-tinymce'
 //This page is where the user can create their story.
 //TO DO: Add ability for user to switch their story between options of public or private.
@@ -177,6 +178,20 @@ class EditPage extends Component {
   }
 
   render() {
+    // const responseGoogle = (response) => {
+    //   console.log(response)
+    //   fetch('http://localhost:2018/OAuth/google', {
+    //     method: "POST",
+    //     body: response.tokenId
+    //   })
+    //   .catch(err => {
+    //     console.log(err.message)
+    //   })
+    //   .then(res => { return res.json })
+    //   .then(loginResponse => {
+    //     console.log("LOGIN", loginResponse)
+    //   })
+    // }
     return (
       <div className="main-body">
         <div className="listings">

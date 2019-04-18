@@ -216,6 +216,7 @@ legend {
   margin-bottom: 10px;
   border: 2px solid black;
   flex-direction: column;
+  box-shadow: 0px 0px 7px 0px;
 }
 
 .login-inputs {
@@ -236,18 +237,34 @@ legend {
   align-self: center;
   padding: 3px;
 }
+.googleLogin {
+  margin-top: 7px;
+  margin-bottom: 3px;
+  border: 1px solid black;
+  padding: 10px;
+}
+.googleLogin p {
+  font-family: "Courier New', Courier, monospace";
+  font-weight: bold;
+  font-size: 17px;
+}
 
 .userNav {
   display: flex;
   justify-content: space-evenly;
   font-size: 18px;
-  color: darkcyan;
+  border: 1px solid black;
+  padding: 5px;
+  box-shadow: 0px 0px 5px 0px;
 }
 
 .userNav a {
   text-decoration: none;
   color: blueviolet;
   padding-top: 2px;
+}
+.userNav a:hover{
+  color: darkcyan;
 }
 
 /*Code for Register Page*/

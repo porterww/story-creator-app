@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
+// import GoogleLogout from 'react-google-login'
 // import PropTypes from 'prop-types'
 //This page is where the user can view story(s).
 //TO DO: Add ability for user to search for other users and stories.
@@ -86,7 +87,20 @@ class ViewPage extends Component {
   }
 
   render() {
-    // console.log(this.state)
+    // const responseGoogle = (response) => {
+    //   console.log(response)
+    //   fetch('http://localhost:2018/OAuth/google', {
+    //     method: "POST",
+    //     body: response.tokenId
+    //   })
+    //   .catch(err => {
+    //     console.log(err.message)
+    //   })
+    //   .then(res => { return res.json })
+    //   .then(loginResponse => {
+    //     console.log("LOGIN", loginResponse)
+    //   })
+    // }
     return (
       <div className="main-body">
         <div className="listings">
