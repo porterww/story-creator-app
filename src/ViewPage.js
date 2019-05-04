@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
-// import GoogleLogout from 'react-google-login'
+import GoogleLogout from 'react-google-login'
 // import PropTypes from 'prop-types'
 //This page is where the user can view story(s).
 //TO DO: Add ability for user to search for other users and stories.

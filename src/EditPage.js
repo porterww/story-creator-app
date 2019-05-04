@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
-// import GoogleLogout from 'react-google-login'
+import GoogleLogout from 'react-google-login'
 // import TinyMCE from 'react-tinymce'
 //This page is where the user can create their story.
 //TO DO: Add ability for user to switch their story between options of public or private.

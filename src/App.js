@@ -4,7 +4,7 @@ import RegisterPage from './RegisterPage'
 import EditPage from './EditPage'
 import ViewPage from './ViewPage'
 import './shared.css'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, withRouter } from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import ForgotPass from './ForgotPass';
