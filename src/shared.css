@@ -132,6 +132,16 @@ footer {
   margin-bottom: 7px;
 }
 
+#story {
+  margin: 25px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-top: 25px;
+  padding-bottom: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
 .form {
   display: inline-block;
   width: 200px;
