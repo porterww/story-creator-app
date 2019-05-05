@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import UserNav from './UserNav'
 import GoogleLogin from 'react-google-login'
-import {GoogleLogout} from 'react-google-login'
 //this will be the new front page before users can see anything else and will provide the options of login or what UserNav Component offers at bottom page
 class LoginPage extends Component {
   render() {
@@ -65,7 +64,6 @@ class LoginPage extends Component {
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
                   />
-                  {/* <GoogleLogout buttonText="Logout" onLogoutSuccess={logout} /> */}
                 </div>
               </div>
             </section>

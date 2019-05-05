@@ -39,13 +39,13 @@ class EditPage extends Component {
 
       //the event below is for TinyMCE when it is returned
       // storyInProgress: event.target.getContent()
-    }) 
+    })
   }
 
   async componentDidMount() {
     await this.getStories()
   }
-  
+
   getStories = async () => {
     try {
       const r = await fetch('http://localhost:2018/stories', {
@@ -112,7 +112,7 @@ class EditPage extends Component {
       } else {
         await this.getStories()
         // console.log(updatedstory.title)
-         this.setState({
+        this.setState({
           titleInProgress: updatedstory.title,
           authorInProgress: updatedstory.author,
           genreInProgress: updatedstory.genre,
@@ -124,7 +124,7 @@ class EditPage extends Component {
       return this.setState({ error: error.message })
     }
   }
-  deleteMyStory = async (story) => {
+  deleteMyStory = async story => {
     console.log('deleting a story', story)
     try {
       await fetch(`http://localhost:2018/stories-delete/${story._id}`, {
@@ -137,10 +137,10 @@ class EditPage extends Component {
           story: this.state._id
         })
       })
-        await this.getStories(story)
-      } catch (error) {
-        return this.setState({ error: error.message })
-      }
+      await this.getStories(story)
+    } catch (error) {
+      return this.setState({ error: error.message })
+    }
   }
 
   saveStory = () => {
@@ -169,7 +169,7 @@ class EditPage extends Component {
                 idInProgress: stories._id
               })
             }
-            deleteHandler={()=>this.deleteMyStory(stories)}
+            deleteHandler={() => this.deleteMyStory(stories)}
             allowDelete={true}
           />
         )
@@ -178,22 +178,15 @@ class EditPage extends Component {
   }
 
   render() {
-    // const responseGoogle = (response) => {
-    //   console.log(response)
-    //   fetch('http://localhost:2018/OAuth/google', {
-    //     method: "POST",
-    //     body: response.tokenId
-    //   })
-    //   .catch(err => {
-    //     console.log(err.message)
-    //   })
-    //   .then(res => { return res.json })
-    //   .then(loginResponse => {
-    //     console.log("LOGIN", loginResponse)
-    //   })
-    // }
     return (
       <div className="main-body">
+        {/* <div className="google-logout">
+          <GoogleLogout
+            client_id="..."
+            buttonText="Logout"
+            onLogoutSuccess={logout}
+          />
+        </div> */}
         <div className="listings">
           <section id="story-listing">
             <div className="story-listing-header">
