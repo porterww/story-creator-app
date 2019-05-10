@@ -70,8 +70,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={this.renderLoginPage} />
             <Route exact path="/Sign-up-form" component={this.renderRegisterPage} />
-            <Route exact path="/Edit-Page" component={this.renderEditPage} />
-            <Route path="/View-Page" component={this.renderViewPage} />
+            <Route exact path="/Edit-Page" component={EditPage} />
+            <Route path="/View-Page" component={ViewPage} />
             <Route path="/Recover-Password" component={this.renderForgotPass} />
           </Switch>
         </div>
