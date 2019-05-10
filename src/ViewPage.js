@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
-import GoogleLogout from 'react-google-login'
-import ReactPaginate from 'react-paginate'
+// import GoogleLogout from 'react-google-login'
+// import ReactPaginate from 'react-paginate'
 // import PropTypes from 'prop-types'
 //This page is where the user can view story(s).
 //TO DO: Add ability for user to search for other users and stories.
 //TO DO: Add menu dropdown for users for eventual profile editing settings, display settings, and logout features.
-//TO DO: Add a follow other users and rating system.
+//TO DO: Add a follow other users and an optional rating/comment system.
 
 class ViewPage extends Component {
   static propTypes = {
