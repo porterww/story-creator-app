@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SiteNav from './SiteNav'
 import StoryList from './StoryList'
+import CRUD from './CRUD'
 import GoogleLogout from 'react-google-login'
 // import TinyMCE from 'react-tinymce'
 //This page is where the user can create their story.
@@ -13,7 +14,7 @@ class EditPage extends Component {
     genreInProgress: '',
     storyInProgress: '',
     story: ''
-  }
+  } 
 
   handleTitleChange = event => {
     this.setState({
@@ -124,24 +125,24 @@ class EditPage extends Component {
       return this.setState({ error: error.message })
     }
   }
-  deleteMyStory = async story => {
-    console.log('deleting a story', story)
-    try {
-      await fetch(`http://localhost:2018/stories-delete/${story._id}`, {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          story: this.state._id
-        })
-      })
-      await this.getStories(story)
-    } catch (error) {
-      return this.setState({ error: error.message })
-    }
-  }
+  // deleteMyStory = async story => {
+  //   console.log('deleting a story', story)
+  //   try {
+  //     await fetch(`http://localhost:2018/stories-delete/${story._id}`, {
+  //       method: 'DELETE',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         story: this.state._id
+  //       })
+  //     })
+  //     await this.getStories(story)
+  //   } catch (error) {
+  //     return this.setState({ error: error.message })
+  //   }
+  // }
 
   saveStory = () => {
     if (this.state.idInProgress) {
@@ -154,8 +155,9 @@ class EditPage extends Component {
 
   renderStories = () => {
     // console.log(this.state.stories[_id])
+    
     if (this.state.stories) {
-      return this.state.stories.map((stories, i) => {
+        return this.state.stories.map((stories, i) => {
         return (
           <StoryList
             key={i}
@@ -169,9 +171,9 @@ class EditPage extends Component {
                 idInProgress: stories._id
               })
             }
-            deleteHandler={() => this.deleteMyStory(stories)}
+            deleteHandler={() => CRUD.deleteMyStory(stories)}
             allowDelete={true}
-          />
+          />         
         )
       })
     }

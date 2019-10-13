@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import StoryList from './StoryList'
+//import StoryList from './StoryList'
 
 class CRUD extends Component {
   async componentDidMount() {
@@ -84,6 +84,8 @@ class CRUD extends Component {
       return this.setState({ error: error.message })
     }
   }
+
+
   deleteMyStory = async story => {
     console.log('deleting a story', story)
     try {
@@ -103,47 +105,48 @@ class CRUD extends Component {
     }
   }
 
-  static renderStories = () => {
-    // console.log(this.state.stories[_id])
-    if (this.state.stories) {
-      return this.state.stories.map((stories, i) => {
-        return (
-          <StoryList
-            key={i}
-            title={stories.title}
-            selectHandler={() =>
-              this.setState({
-                titleInProgress: stories.title,
-                authorInProgress: stories.author,
-                genreInProgress: stories.genre,
-                storyInProgress: stories.story,
-                idInProgress: stories._id
-              })
-            }
-            deleteHandler={() => this.deleteMyStory(stories)}
-            allowDelete={true}
-          />
-        )
-      })
-    }
-  }
+//   static renderStories = () => {
+//     // console.log(this.state.stories[_id])
+//     if (this.state.stories) {
+//       return this.state.stories.map((stories, i) => {
+//         return (
+//           <StoryList
+//             key={i}
+//             title={stories.title}
+//             selectHandler={() =>
+//               this.setState({
+//                 titleInProgress: stories.title,
+//                 authorInProgress: stories.author,
+//                 genreInProgress: stories.genre,
+//                 storyInProgress: stories.story,
+//                 idInProgress: stories._id
+//               })
+//             }
+//             deleteHandler={() => this.deleteMyStory(stories)}
+//             allowDelete={true}
+//           />
+//         )
+//       })
+//     }
+//   }
 
-  saveStory = () => {
-    if (this.state.idInProgress) {
-      this.updateStory()
-    } else {
-      this.postData()
-    }
-    this.setState({})
-  }
-  render() {
-    return (
-      <button className="savebutton" type="submit" onClick={this.saveStory}>
-        Save Story
-      </button>
-    )
-  }
+//   saveStory = () => {
+//     if (this.state.idInProgress) {
+//       this.updateStory()
+//     } else {
+//       this.postData()
+//     }
+//     this.setState({})
+//   }
+//   render() {
+//     return (
+//       <button className="savebutton" type="submit" onClick={this.saveStory}>
+//         Save Story
+//       </button>
+//     )
+//   }
 }
 
-export {renderStories} from './CRUD'
+//export {deleteMyStory} from './CRUD'
 export default CRUD
+
