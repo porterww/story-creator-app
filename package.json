@@ -9,7 +9,7 @@
     "acorn": "^6.1.1",
     "acorn-dynamic-import": "^4.0.0",
     "acorn-jsx": "^5.0.1",
-    "ajv": "^6.10.0",
+    "ajv": "^6.12.3",
     "bcryptjs": "^2.4.3",
     "i": "^0.3.6",
     "merge": "^1.2.1",
